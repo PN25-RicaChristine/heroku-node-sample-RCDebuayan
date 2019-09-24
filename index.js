@@ -1,9 +1,8 @@
 var app = require('express')();
-var http = require('http').createServer(app);
-var port = process.env.PORT || 3000;
-
+var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ip = require("ip");
+var port = process.env.PORT || 3000;
 
 var clients = [];
 var incr = 1;
@@ -69,6 +68,8 @@ io.on('connection', function(socket){
     io.emit('users list', getUsersList());
    });
 });
+
+
 
 http.listen(port, function(){
   console.log('listening on *:'+port+" and "+ip.address()+port);
