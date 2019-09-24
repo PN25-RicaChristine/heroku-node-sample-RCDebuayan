@@ -72,7 +72,7 @@ io.on('connection', function (socket) {
 
 
 http.listen(port, function () {
-    console.log('listening on *:' + port + " and " + ip.address() + port);
+    console.log('listening on *:' + port + " and " + ip.address()+":"+ port);
 });
 
 // app.listen(process.env.PORT);
