@@ -1,7 +1,7 @@
 var app = require('express')();
-var https = require('https').Server(app);
+var https = require('http').Server(app);
 var io = require('socket.io')(https);
-//var ip = require("ip");
+var ip = require("ip");
 var port =process.env.PORT || 3000;
 
 var clients = [];
@@ -70,5 +70,5 @@ io.on('connection', function(socket){
 });
 
 https.listen(port, function(){
-  console.log("listening on localhost:"+port);
+  console.log("listening on localhost:"+port+" and "+ip.address()+":"+port);
 });
