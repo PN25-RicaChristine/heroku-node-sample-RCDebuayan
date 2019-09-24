@@ -1,10 +1,8 @@
-
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ip = require("ip");
-var port = process.env.PORT || 3000;
-
+var port =process.env.PORT;
 
 var clients = [];
 var incr = 1;
@@ -45,38 +43,32 @@ io.on('connection', function(socket){
   });
 
   socket.on('set nick', function(nick){
-    io.emit('info', "New user connected: " + nick); 
-    console.log(nick);
-    clients[clients.indexOf(socket)].n = nick; 
-    console.log(clients[clients.indexOf(socket)].n);
-    io.emit('users list', getUsersList()); 
-    console.log(getUsersList());
+    io.emit('info', "New user connected: " + nick); //console.log(nick);
+    clients[clients.indexOf(socket)].n = nick; //console.log(clients[clients.indexOf(socket)].n);
+    io.emit('users list', getUsersList()); //console.log(getUsersList());
   });
 
   socket.on('typing', function(){
-    io.emit('typing signal', setUserTyping(clients.indexOf(socket))); 
-    console.log(setUserTyping(clients.indexOf(socket)));
+    io.emit('typing signal', setUserTyping(clients.indexOf(socket))); //console.log(setUserTyping(clients.indexOf(socket)));
   });
 
   socket.on('not typing', function(){
-    io.emit('typing signal', getUsersList()); 
-    console.log(getUsersList());
+    io.emit('typing signal', getUsersList()); //console.log(getUsersList());
   });
 
   socket.on('disconnect', function() {
     if( clients[clients.indexOf(socket)].n == null ){
-      console.log('Guest disconnect!');
+      //console.log('Guest disconnect!');
     }
     else{
-      console.log(clients[clients.indexOf(socket)].n +' disconnect!');
+      //console.log(clients[clients.indexOf(socket)].n +' disconnect!');
       io.emit('info', "User " + clients[clients.indexOf(socket)].n + " disconnected.");
     }
-    clients.splice(clients.indexOf(socket),1);
+    clients.splice(clients.indexOf(socket),1);//clientIndex, 1);
     io.emit('users list', getUsersList());
    });
 });
 
-
-http.listen(port, function () {
-    console.log('listening on *:' + port + " and " + ip.address()+":"+ port);
+http.listen(port, function(){
+  console.log("listening on localhost:"+port+" and "+ip.address()+":"+port);
 });
