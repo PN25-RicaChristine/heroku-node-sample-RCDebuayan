@@ -103,7 +103,7 @@
       <ul id="messages"></ul>
     </section>
 
-    <form>
+    <form id="form">
       <input id="boxMessage" placeholder="   Type your message here..." autocomplete="off" disabled="true" /><button id="buttonMessage"
         disabled="true">Send</button>
     </form>
@@ -126,7 +126,7 @@
     socket.on('nick', function (nick) {
       myNick = nick;
     });
-    $('form').submit(function () {
+    $('#form').submit(function () {
       var temp = [myNick, $("#boxMessage").val()];
       socket.emit("send chat message", temp);
       $("#boxMessage").val("");
