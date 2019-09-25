@@ -1,7 +1,7 @@
 {
   "name": "heroku-node-sample-rcdebuayan",
   "version": "1.0.0",
-  "description": "This example is so cool.",
+  "description": "Heroku",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
